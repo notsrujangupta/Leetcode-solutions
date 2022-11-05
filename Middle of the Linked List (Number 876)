@@ -1,0 +1,24 @@
+#https://leetcode.com/problems/middle-of-the-linked-list/
+
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+        #going to use 2 variables, mid and end. mid will jump one step in the linked list, end will jump two.
+        #When end reached the final node, mid will have been at the middle.
+
+        if head.val == None:
+            return None
+        mid = head
+        end = head
+        
+        #since end is jumping 2 steps, we need to make sure end.next.next exists
+        #but this creates a wrinkle: if there are an even number of nodes, end reaches the second-last node instead. This also means that mid is one step behind.
+        #so once the while loop is complete, we can use an if to see if end.next exists. If so, move mid back one. Moving end back as well jsut so I can feel good.
+        while end.next and end.next.next:
+            mid = mid.next
+            end = end.next.next
+        if end.next:
+            mid = mid.next
+            end = end.next
+        
+        return mid
