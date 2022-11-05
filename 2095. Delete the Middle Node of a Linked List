@@ -1,0 +1,24 @@
+#https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+
+class Solution:
+    def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        #need to attach the node before mid to the one after it.
+        # make  the end variable go twice as fast as the before_mid variable, as long as we hae appropriate starting points, it'll be fine.
+        
+        #in case the linked list has 0 or 1 total elements, we only want None as an answer.
+        if not head.next:
+            return head.next
+        
+        #before_id starts at the first element, end starts at the third.
+        before_mid = head
+        end = head.next.next
+        
+        #we want to make sure that end.next exists, or else end.next.next will cause troubles.
+        #If only end.next is used for the while condition, our current node might be None, and end.next will not exist, thus causing the condition to be invalid.
+        while end and end.next:
+            before_mid = before_mid.next
+            end = end.next.next
+        
+        #connecting the nodes
+        before_mid.next = before_mid.next.next
+        return head
