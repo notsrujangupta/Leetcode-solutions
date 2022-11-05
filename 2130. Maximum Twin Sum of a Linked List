@@ -1,0 +1,25 @@
+#https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
+
+class Solution:
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        #mid traverses half the linked list in the same time end does the whole linked list. Every number traversed by mid gets put in a nums list.
+        #then mid traverses the other half of the list and we add those numbers to nums but in reverse fashion
+        #get max
+        
+        nums1 = []
+        mid = head
+        end = head.next
+        while end and end.next:
+            nums1.append(mid.val)
+            mid = mid.next
+            end = end.next.next
+
+        nums1.append(mid.val)
+        mid = mid.next
+
+        i = -1
+        while mid:
+            nums1[i] = nums1[i] + mid.val
+            mid = mid.next
+            i -= 1
+        return max(nums1)
