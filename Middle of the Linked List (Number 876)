@@ -6,7 +6,7 @@ class Solution:
         #going to use 2 variables, mid and end. mid will jump one step in the linked list, end will jump two.
         #When end reached the final node, mid will have been at the middle.
 
-        if head.val == None:
+        if head == None:
             return None
         mid = head
         end = head
